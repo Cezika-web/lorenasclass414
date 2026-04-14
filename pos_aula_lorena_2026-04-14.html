@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumo Pós-Aula — Lorena — CZK English</title>
+
+  <style>
+    :root{
+      --page-bg: #f4f7fa;
+      --card-bg: #fff;
+      --accent: #2f86e6;
+      --accent-dark: #1f6fd1;
+      --green: #36b37e;
+      --muted: #6b7280;
+      --border: #e6eef8;
+      --box-radius: 12px;
+      --card-width: 720px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-bg);
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-width);
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 6px 22px rgba(33,47,60,0.06);
+      border:1px solid rgba(15,33,64,0.03);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      background:linear-gradient(180deg,#fff,#f2fbff);
+      border:1px solid var(--border);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.3rem;
+      color:#0f1724;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:6px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(47,134,230,0.12);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    main{margin-top:18px;}
+    section{margin-top:18px;}
+
+    .panel{
+      background:#fbfdff;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid var(--border);
+    }
+
+    .outline-card{
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:16px;
+      background:#fff;
+    }
+
+    /* Vocabulary boxes */
+    .vocab-grid{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .vocab{
+      flex:1;
+      min-width:220px;
+      border-radius:10px;
+      padding:14px;
+      border:2px solid #dfeefe;
+      background:#fff;
+    }
+
+    .vocab.green{
+      border-color:#c9f3dc;
+      background:#f5fff6;
+    }
+
+    .vocab h3{
+      margin:0;
+      font-size:1rem;
+      color:#154360;
+    }
+
+    .vocab p{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* Transcrição / gravação buttons */
+    .media-row{
+      display:flex;
+      gap:14px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .media-btn{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:200px;
+      justify-content:center;
+    }
+
+    /* Homework box */
+    .homework{
+      background:#f3fff6;
+      border:1px solid #d7f5df;
+      border-radius:10px;
+      padding:14px;
+      margin-top:10px;
+    }
+
+    /* ===== TALK TIME – TABELA RETANGULAR ===== */
+    .speaking{
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      max-width:640px;
+    }
+
+    .speaking h2{
+      margin:0 0 10px 0;
+      font-size:1.05rem;
+      color:#0f1724;
+    }
+
+    .talk-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #e1e9f5;
+      font-size:0.9rem;
+    }
+
+    .talk-table th,
+    .talk-table td{
+      padding:8px 10px;
+      text-align:left;
+    }
+
+    .talk-table th{
+      background:#eef4ff;
+      color:#1b3556;
+      font-weight:700;
+      border-bottom:1px solid #dde6fa;
+    }
+
+    .row-teacher{
+      background:#e7f2ff; /* azul clarinho */
+    }
+
+    .row-student{
+      background:#e8f7ef; /* verde clarinho */
+    }
+
+    .talk-label{
+      font-weight:700;
+    }
+
+    .talk-percent{
+      font-weight:700;
+      color:#0f1724;
+    }
+
+    .talk-time{
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:14px;}
+      .vocab-grid{flex-direction:column;}
+      .media-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card" role="main">
+      <header>
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="badge">PÓS-AULA</span>
+            <h1>Revisão de weekend, prepositions of time e festival events</h1>
+          </div>
+          <div class="meta" style="margin-top:8px;">
+            <strong>Professor:</strong> César &nbsp;•&nbsp;
+            <strong>Aluno:</strong> Lorena &nbsp;•&nbsp;
+            <strong>Data:</strong> 04/14/2026
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p style="margin:0;font-weight:600;color:#08325a;">
+            Revisão de passado com <em>went</em>, vocabulário com Babadum, leitura sobre cinema e prática de eventos com <em>in</em>, <em>on</em> e <em>at</em>.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Resumo da Aula</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Nesta aula, vocês começaram retomando conteúdos da revisão, especialmente o uso do passado com <strong>went</strong>. O professor relembrou que, sempre que você quiser falar “eu fui”, o verbo correto é <em>went</em>, e usou exemplos como “I went to school” para reforçar essa estrutura. Também apareceram revisões rápidas de expressões já estudadas, como <em>around the corner</em> e <em>police lights</em>, além de correções de pronúncia importantes.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Depois, vocês jogaram <strong>Babadum</strong> para revisar vocabulário de forma mais dinâmica. Durante essa parte, surgiram várias palavras novas e outras já conhecidas, com foco em leitura mais calma das opções, pronúncia e associação entre imagem e palavra. O professor chamou atenção principalmente para a importância de não responder rápido demais sem ler todas as alternativas, porque isso estava fazendo você errar palavras que poderia acertar com mais atenção.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Na sequência, houve uma leitura de um texto sobre mudanças nos cinemas para tornar a experiência mais <strong>immersive</strong>. Vocês trabalharam vocabulário como <em>stream</em>, <em>snack</em>, <em>actually</em>, <em>currently</em>, <em>shapes</em>, <em>screens</em>, <em>maybe</em> e <em>a little bit</em>, sempre com explicação em português e retomada do sentido no contexto. O professor reforçou especialmente a diferença entre <em>actually</em> (“na verdade”) e <em>currently</em> (“atualmente”), que é um ponto importante por causa do falso cognato.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Depois da leitura, vocês responderam perguntas de compreensão sobre o texto e fizeram uma atividade de conexão entre palavras e definições, revisando termos como <em>immersive</em>, <em>3D</em>, <em>screen</em>, <em>sound system</em> e <em>streaming chair</em>. O foco foi entender melhor a ideia geral do texto e usar o vocabulário em contexto, não apenas decorar palavras isoladas.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Na parte final, a aula passou para um quadro de eventos de um festival, com atividades sobre <strong>time, location and event</strong>. Aqui o ponto gramatical principal foi o uso de <strong>in, on e at</strong>. O professor retomou o “triângulo” de especificidade: <em>in</em> para tempos mais gerais, como mês e ano; <em>on</em> para dias e datas; e <em>at</em> para horas e pontos mais específicos. Você praticou isso respondendo perguntas sobre horário, lugar e tipo de evento.
+            </p>
+            <p style="margin:0;">
+              Para encerrar, vocês ainda revisaram sujeito, verbo e sentenças completas. O professor pediu para identificar o sujeito em frases e distinguir sentenças completas de trechos incompletos. A aula terminou com o fechamento da unidade 2 e uma prévia da unidade 3, que vai trazer adjetivos, habilidades, conselhos e descrição de sentimentos.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Key Vocabulary</h2>
+          <div class="vocab-grid">
+            <div class="vocab">
+              <h3>immersive</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) imersivo / que faz você se sentir dentro da experiência</em><br>
+                <small>3D movies are more immersive.</small>
+              </p>
+            </div>
+            <div class="vocab green">
+              <h3>currently</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) atualmente</em><br>
+                <small>I am currently studying English.</small>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário da aula</h2>
+          <div class="outline-card">
+            <h3 style="margin-top:0;">Revisão inicial</h3>
+            <ul>
+              <li><strong>went</strong> – fui / foi / foram (passado de <em>go</em>)</li>
+              <li><strong>around the corner</strong> – virando a esquina / logo ali na esquina</li>
+              <li><strong>police lights</strong> – luzes da polícia</li>
+              <li><strong>weekend</strong> – fim de semana</li>
+            </ul>
+
+            <h3>Vocabulário do Babadum</h3>
+            <ul>
+              <li><strong>chips</strong> – batata chips / salgadinho</li>
+              <li><strong>frog</strong> – sapo</li>
+              <li><strong>slingshot</strong> – estilingue</li>
+              <li><strong>comforter</strong> – edredom / coberta grossa</li>
+              <li><strong>treasure</strong> – tesouro</li>
+              <li><strong>broccoli</strong> – brócolis</li>
+              <li><strong>South America</strong> – América do Sul</li>
+              <li><strong>pickpocket</strong> – batedor de carteira</li>
+              <li><strong>ink</strong> – tinta</li>
+              <li><strong>rainbow</strong> – arco-íris</li>
+              <li><strong>plunger</strong> – desentupidor</li>
+              <li><strong>tea bag</strong> – sachê de chá</li>
+              <li><strong>miner</strong> – minerador</li>
+              <li><strong>bill</strong> – nota / conta</li>
+              <li><strong>to vote</strong> – votar</li>
+              <li><strong>kitchen</strong> – cozinha</li>
+            </ul>
+
+            <h3>Texto sobre cinema</h3>
+            <ul>
+              <li><strong>stream</strong> – transmissão / live / conteúdo passando online</li>
+              <li><strong>snack</strong> – lanchinho / aperitivo</li>
+              <li><strong>immersive</strong> – imersivo</li>
+              <li><strong>actually</strong> – na verdade</li>
+              <li><strong>currently</strong> – atualmente</li>
+              <li><strong>change / changes</strong> – mudar / mudanças</li>
+              <li><strong>shape</strong> – forma / formato</li>
+              <li><strong>screen / screens</strong> – tela / telas</li>
+              <li><strong>also</strong> – também</li>
+              <li><strong>maybe</strong> – talvez</li>
+              <li><strong>spend money</strong> – gastar dinheiro</li>
+              <li><strong>a little bit</strong> – um pouquinho</li>
+              <li><strong>3D capability</strong> – capacidade/recurso 3D</li>
+              <li><strong>moving seats</strong> – cadeiras que se mexem</li>
+              <li><strong>LED screens</strong> – telas de LED</li>
+              <li><strong>sound system</strong> – sistema de som</li>
+            </ul>
+
+            <h3>Festival e eventos</h3>
+            <ul>
+              <li><strong>event listing</strong> – lista de eventos</li>
+              <li><strong>kite making workshop</strong> – oficina de fazer pipa</li>
+              <li><strong>their own</strong> – o próprio / suas próprias</li>
+              <li><strong>traditional play</strong> – peça tradicional</li>
+              <li><strong>Japanese concert</strong> – concerto japonês</li>
+              <li><strong>featuring</strong> – com participação de / apresentando</li>
+              <li><strong>drums</strong> – tambores / bateria</li>
+              <li><strong>cymbals</strong> – pratos</li>
+              <li><strong>gongs</strong> – gongos</li>
+              <li><strong>Korean dance</strong> – dança coreana</li>
+              <li><strong>fan dance</strong> – dança com leques</li>
+              <li><strong>lotus</strong> – lótus</li>
+              <li><strong>festival</strong> – festival</li>
+              <li><strong>workshop</strong> – oficina</li>
+            </ul>
+
+            <h3>Gramática e análise de frase</h3>
+            <ul>
+              <li><strong>subject</strong> – sujeito</li>
+              <li><strong>verb</strong> – verbo</li>
+              <li><strong>complete sentence</strong> – frase completa</li>
+              <li><strong>in</strong> – em (mês, ano, período mais geral)</li>
+              <li><strong>on</strong> – em (dia, data)</li>
+              <li><strong>at</strong> – em / às (hora, ponto específico)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Frases modelo da aula</h2>
+          <div class="outline-card">
+            <ul>
+              <li>I went to school.</li>
+              <li>Around the corner means virando a esquina.</li>
+              <li>Police lights.</li>
+              <li>Movie theaters are making a lot of changes.</li>
+              <li>They want you to feel like you are actually inside the movie.</li>
+              <li>Actually means “na verdade”.</li>
+              <li>Currently means “atualmente”.</li>
+              <li>Why not spend a little bit more?</li>
+              <li>The LED screens help people feel inside the story.</li>
+              <li>It is a more immersive experience.</li>
+              <li>The kite making workshop is at 1 PM.</li>
+              <li>The Korean dance is at the Rand Park Band Shell.</li>
+              <li>The Chinese movie is at 5 PM.</li>
+              <li>The festival is on Saturday, May tenth.</li>
+              <li>It is at the Park Arts Center in Randy Park.</li>
+              <li>There is a Japanese play at the Park Arts Theater.</li>
+              <li>In May, on Saturday, at 1 PM.</li>
+              <li>She loves country music.</li>
+              <li>Turn right at the bookstore.</li>
+              <li>When is the next show?</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Correções importantes</h2>
+          <div class="outline-card">
+            <ul>
+              <li><strong>go → went:</strong> o professor reforçou que o passado de <em>go</em> é <strong>went</strong>. Ex.: <em>I went to school</em>.</li>
+              <li><strong>fim de semana:</strong> quando a pergunta é sobre o <em>weekend</em>, a resposta precisa se conectar ao contexto. O professor corrigiu o uso de frases fora da situação, como responder “I went to school” ao falar do fim de semana.</li>
+              <li><strong>police x please/police-like sounds:</strong> houve correção de pronúncia em <strong>police lights</strong>. O professor chamou atenção para não transformar a palavra em outro som.</li>
+              <li><strong>responder com calma:</strong> no Babadum, o professor destacou que você estava tentando responder rápido demais, sem ler todas as opções, e isso estava causando erros evitáveis.</li>
+              <li><strong>actually ≠ atualmente:</strong> foi corrigido que <strong>actually</strong> significa “na verdade”. Para “atualmente”, o correto é <strong>currently</strong>.</li>
+              <li><strong>immersive x impressive:</strong> o professor corrigiu que o texto falava de algo <strong>immersive</strong> (imersivo), não <em>impressive</em>.</li>
+              <li><strong>capability:</strong> houve ajuste de pronúncia em <strong>capability</strong>.</li>
+              <li><strong>fan dance:</strong> o professor explicou que <strong>fan</strong> nessa expressão não é “fã”, mas sim o objeto “leque”.</li>
+              <li><strong>prepositions of time:</strong> o ponto mais reforçado da parte final foi o uso de <strong>in, on, at</strong>. <em>In</em> para mês/ano, <em>on</em> para dia/data e <em>at</em> para hora.</li>
+              <li><strong>Saturday, May tenth:</strong> o professor mostrou que, ao falar a data completa, não precisa repetir um <em>on</em> antes de tudo. Ex.: <em>on Saturday</em>, mas depois <em>Saturday, May tenth</em>.</li>
+              <li><strong>subject identification:</strong> no exercício final, o professor corrigiu a diferença entre sujeito e verbo em frases como <em>Pop music</em> e <em>Harper</em>.</li>
+              <li><strong>complete sentence:</strong> o professor reforçou a ideia de que uma frase completa precisa fazer sentido sozinha, sem depender de palavras antes ou depois.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Transcrição &amp; Gravação</h2>
+          <div class="media-row">
+            <a class="media-btn" href="#" role="button">📄 Acessar transcrição</a>
+
+            <a
+              class="media-btn"
+              href="https://youtu.be/1B9C2FQugWw"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              style="background:linear-gradient(180deg,#1f6fd1,#2f86e6);color:#fff;border:none;min-width:260px;"
+            >
+              🎥 Assistir gravação (acesso privado)
+            </a>
+          </div>
+        </section>
+
+        <section class="speaking" aria-label="Distribuição de fala">
+          <h2>Tempo de Fala (Talk Time)</h2>
+          <table class="talk-table">
+            <thead>
+              <tr>
+                <th>Quem falou</th>
+                <th>Porcentagem</th>
+                <th>Duração aproximada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-teacher">
+                <td><span class="talk-label">César (Professor)</span></td>
+                <td><span class="talk-percent">64%</span></td>
+                <td class="talk-time">~38 minutos</td>
+              </tr>
+              <tr class="row-student">
+                <td><span class="talk-label">Lorena</span></td>
+                <td><span class="talk-percent">36%</span></td>
+                <td class="talk-time">~22 minutos</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Homework</h2>
+          <div class="homework">
+            <p style="margin:0 0 8px 0;">
+              📌 <strong>Lição de casa (como combinado em aula):</strong>
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li>Ler o pós-aula de 2 a 3x na semana.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn" href="https://wa.me" style="background:#25D366;border-radius:10px;box-shadow:none;">
+              💬 Falar comigo no WhatsApp
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <p style="margin:18px 0 0 0;color:var(--muted);font-size:0.9rem;">
+          © 2025 CZK English • Este conteúdo é exclusivo para fins educacionais. • Suporte: czkenglish@gmail.com
+        </p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
